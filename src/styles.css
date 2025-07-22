@@ -60,3 +60,22 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+/* form content area */
+.form-handler {
+    width: 100%;
+    max-width: 600px;
+    background-color: var(--bg-common);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.todo-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
