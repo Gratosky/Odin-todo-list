@@ -1,5 +1,7 @@
-export function formHandler(containerId, onNewTodoCallback) {
-    const container = document.querySelector('.form-handler')
+import { todoController } from "./todoController"
+
+export function createAndInitializeForm(containerId) {
+    const container = document.getElementById('form-handler')
 
     if(!container) {
         console.error(`Container with Id '${containerId}' not found for form handler!`)
@@ -57,15 +59,15 @@ export function formHandler(containerId, onNewTodoCallback) {
 
     todoForm.addEventListener('submit', (e) => {
         e.preventDefault()
-        const todoText = newTodoTitleInput.value.trim()
+        const todoTitle = newTodoTitleInput.value.trim()
         const todoDueDate = newTodoDueDate.value
         const todoImportance = newTodoImportanceSelect.value
 
-        if(todoText) {
-            onNewTodoCallback(todoText, '', todoDueDate, todoImportance)
+        if(todoTitle) {
+            todoController.addTodo( todoDueDate, todoImportance)
             newTodoTitleInput.value = ''
             newTodoDueDate.value = ''
-            newTodoImportanceSelect = ''
+            newTodoImportanceSelect.value = ''
         }
     })
 }

@@ -34,5 +34,3 @@ export class TodoItem{
     }
 }
 
-const item1 = new TodoItem('wash clothes', 'take some time to wash your clothes', '2025-07-23', 'must')
-console.log(item1)
