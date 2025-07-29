@@ -48,26 +48,38 @@ export function createAndInitializeForm(containerId) {
     submitBtn.type = 'submit'
     submitBtn.textContent = 'Add Todo'
 
+    //create a notes section
+    const newTodoNote = document.createElement('input')
+    newTodoNote.type = 'text'
+    newTodoNote.placeholder = 'Add new note!'
+
     //Append elements to the form
     todoForm.appendChild(newTodoTitleInput)
     todoForm.appendChild(newTodoDueDate)
     todoForm.appendChild(newTodoImportanceSelect)
+    todoForm.appendChild(newTodoNote)
     todoForm.appendChild(submitBtn)
 
     //append the form to the container
     container.appendChild(todoForm)
 
     todoForm.addEventListener('submit', (e) => {
+        console.log('submitting form')
         e.preventDefault()
+
         const todoTitle = newTodoTitleInput.value.trim()
         const todoDueDate = newTodoDueDate.value
         const todoImportance = newTodoImportanceSelect.value
+        const todoNote = newTodoNote.value
+        
 
         if(todoTitle) {
-            todoController.addTodo( todoDueDate, todoImportance)
+            console.log('submitted successfully and ready for next...')
+            todoController.addTodo( todoTitle, todoDueDate, todoImportance, todoNote)
             newTodoTitleInput.value = ''
             newTodoDueDate.value = ''
             newTodoImportanceSelect.value = ''
+            newTodoNote.value = ''
         }
     })
 }

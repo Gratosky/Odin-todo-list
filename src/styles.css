@@ -1,160 +1,149 @@
 :root {
-    --bg-common: #f0f0f0;
-    --text-color: #333;
-    --header-color: #4a90e2;
-    --button-bg: #4a90e2;
-    --button-text: #fff;
-    --button-hover-bg: #357ab8;
+  --bg-common: #f0f0f0;
+  --text-color: #333;
+  --header-color: #4a90e2;
+  --button-bg: #4a90e2;
+  --button-text: #fff;
+  --button-hover-bg: #357ab8;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-    color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+  color: var(--text-color);
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-    background-color: var(--bg-common);
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    color: var(--text-color);
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--bg-common);
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+  color: var(--text-color);
+  box-sizing: border-box;
 }
 
 .header {
-    font-size: 2rem;
-    height: 60px;
-    text-align: center;
-    color: var(--header-color);
-    letter-spacing: 1px;
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-    background-color: var(--bg-common);
+  font-size: 2rem;
+  height: 60px;
+  text-align: center;
+  color: var(--header-color);
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background-color: var(--bg-common);
 }
 
 .top-header {
-    display: flex;
-    justify-content: center;
-    width: 50%;
-    max-width: 1200px;
-    padding-left: 10px;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  max-width: 1200px;
+  padding-left: 10px;
+  align-items: center;
 }
 
 .intro-header {
-    font-size: 1.2rem;
-    color: var(--text-color);
-    margin-bottom: 10px;
-    text-align: center;
-    padding: 0 10px;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* form content area 
-.form-handler {
-    width: 100%;
-    max-width: 600px;
-    background-color: var(--bg-common);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-bottom: 10px;
+  text-align: center;
+  padding: 0 10px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*form styles*/
 #todo-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-radius: 8px;
-   
-    padding: 20px 30px;
-    background-color: #8ba6bd;
-    box-shadow: rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 8px;
+
+  padding: 20px 30px;
+  background-color: #8ba6bd;
+  box-shadow: rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
 #todo-form input {
-    margin: 0;
-    padding: 10px;
-    gap: 5px;
-    border: none;
-    border-radius: 7px;
+  margin: 0;
+  padding: 10px;
+  gap: 5px;
+  border: none;
+  border-radius: 7px;
 }
 
 .delete-button {
-    background-color: #333;
-    color: aliceblue;
-    border: none;
-    padding: 5px 5px;
-    border-radius: 6px;
+  background-color: #333;
+  color: aliceblue;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 6px;
 }
 
 .add-todo {
-    border: none;
-    border-radius: 7px;
+  border: none;
+  border-radius: 7px;
 }
 
 .completed {
-    text-decoration: line-through;
-    color: #888;
+  text-decoration: line-through;
+  color: #888;
 
-    background-color: #f0f0f0;
-    padding: 5px;
-    border-radius: 5px;
+  background-color: #f0f0f0;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 #todo-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 600px;
-    background-color: var(--bg-common);
-    padding: 20px 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--bg-common);
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .listItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    border-bottom: 1px solid #ccc;
-    background-color: var(--bg-common);
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    padding: 20px 30px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-rows: 1fr auto;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  background-color: var(--bg-common);
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  gap: 10px;
 }
 
 .listItem .delete-button {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .listItem .delete-button:hover {
-    background-color: var(--button-hover-bg);
-    color: var(--button-text);
+  background-color: var(--button-hover-bg);
+  color: var(--button-text);
 }

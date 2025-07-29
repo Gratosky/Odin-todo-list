@@ -1,64 +1,98 @@
-//todoView.js
+//todo view helpers
+const todoListElement = document.getElementById("todo-list");
 
-const todoListElement = document.getElementById('todo-list')
+export const renderTodo = (todoItem) => {
+  //create the list item
+  const listItem = document.createElement("li");
+  listItem.textContent = todoItem;
+  listItem.dataset.id = todoItem.id.toString();
+  listItem.classList.add("list-item");
 
-export const todoView = {
-    
-    renderTodo(todoItem) {
-        
-        const listItem = document.createElement('li')
+  if (todoItem.completed) {
+    listItem.classList.add("completed");
+  }
 
-        listItem.dataset.id = todoItem.id
-        listItem.textContent = todoItem.title
-        listItem.classList.add('listItem')
+  //create a container for the main todo content
+  const todoContent = document.createElement("div");
+  todoContent.classList.add("todo-content");
 
-        if(listItem.completed) {
-            listItem.classList.add('completed')
-        }
+  //create space for title
+  const listItemTitle = document.createElement("p");
+  listItemTitle.textContent = todoItem.title;
+  listItemTitle.classList.add("todo-title");
+  todoContent.appendChild(listItemTitle);
 
-        const deleteButton = document.createElement('button')
-        deleteButton.textContent = 'Delete'
-        deleteButton.classList.add('delete-button')
+  //create space for note
+  const listItemNote = document.createElement("p");
+  listItemNote.textContent = todoItem.note;
+  listItemNote.classList.add("todo-note");
+  todoContent.appendChild(listItemNote);
 
-        listItem.appendChild(deleteButton)
-        todoListElement.appendChild(listItem)
-        
-    },
+  listItem.appendChild(todoContent);
 
-    clearTodos() {
-        console.log('clear')
-        todoListElement.innerHTML = ''
-        console.log('finished clear')
-    },
+  //create delete buttons for list items
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Delete";
+  deleteButton.classList.add("delete-button");
+  listItem.appendChild(deleteButton);
 
-    removeTodoElement() {
-        console.log('removing element:', todoElement)
-        const todoElement = todoListElement.querySelector(`li[data-id='${todoItem.id}']`)
-        console.log(`Target found:`, todoItem.id)
-        if(todoElement) {
-            todoElement.remove()
-        }
-    },
+  if (todoListElement) {
+    todoListElement.appendChild(listItem);
+  } else {
+    console.error("todoListElement not found. Cannot render todo.");
+  }
+};
 
-    updateTodoElement(todoItem) {
-        const todoElement = listItem.querySelector(`li[data-id'${todoItem.id}']`)
-        console.log('updating todo element')
-        if(todoElement) {
-            todoElement.textContent = todoItem.note
+export const clearTodos = () => {
+  if (todoListElement) {
+    todoListElement.innerHTML = "";
+  } else {
+    console.error("todoListElement not found. Cannot clear todos.");
+  }
+  console.log("Finished clearing todos.");
+};
 
-            if(todoItem.completed) {
-                todoElement.classList.add('completed')
-            }else {
-                todoElement.classList.remove('completed')
-            }
+export const removeTodo = (id) => {
+  console.log("Attempting to remove element with ID...", id);
 
-            const deleteButton = document.createElement('button')
-            deleteButton.textContent = 'Delete'
-            deleteButton.classList.add('delete-button')
-            todoElement.appendChild(deleteButton)
-        }
-        console.log('mime')
-    },
-    
-}
+  if (todoListElement) {
+    const todoElement = todoListElement.querySelector(`li[data-id='${id}']`);
+    if (todoElement) {
+      todoElement.remove();
+      console.log(`Element with ID '${id}' removed successfully.`);
+    } else {
+      console.warn(`Warning: Element with ID '${id}' not found!`);
+    }
+  } else {
+    console.error(
+      "Error: todoListElement not found. Make sure the iD is correct!"
+    );
+  }
+};
 
+export const updateTodoElement = (todoItem) => {
+  const todoElement = todoListElement.querySelector(
+    `li[data-id='${todoItem.id}']`
+  );
+  console.log("Updating todo element with ID:", todoItem.id);
+
+  if (todoElement) {
+    const titleElement = todoElement.querySelector(".todo-title");
+    const noteElement = todoElement.querySelector(".todo-note");
+
+    if (titleElement) titleElement.textContent = todoItem.title;
+    if (noteElement) noteElement.textContent = todoItem.note;
+
+    if (todoItem.completed) {
+      todoElement.classList.add("completed");
+    } else {
+      todoElement.classList.remove("completed");
+    }
+    console.log("Todo element updated successfully");
+  } else {
+    console.error(
+      "Warning: Could not find element to update for todo ID:",
+      todoItem.id
+    );
+  }
+};

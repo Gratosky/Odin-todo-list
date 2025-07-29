@@ -1,69 +1,83 @@
 import { TodoItem } from "./todoItem";
 import { loadTodos, saveTodos } from "./storage";
-import { todoView } from "./todoViews";
+import {
+  renderTodo,
+  removeTodo,
+  clearTodos,
+  updateTodoElement,
+} from "./todoViews";
 
-
-let todos = []
+let todos = [];
 
 export const todoController = {
-    init() {
-        console.log('init controller')
-        const loadedData = loadTodos()
-        console.log(loadTodos())
-        todos = loadedData.map(data => TodoItem.fromObject(data))
-        console.log('yamandems')
-        this.renderAllTodos()
-    },
+  init() {
+    console.log("init controller");
+    const loadedData = loadTodos();
+    todos = loadedData.map((data) => TodoItem.fromObject(data));
+    this.renderAllTodos();
+  },
 
-    addTodo(title, description, dueDateString, priority, ) {
-        const todoItem = new TodoItem(title, description, dueDateString, priority)
-        todos.push(todoItem)
-        todoView.renderTodo(todoItem)
-        saveTodos(todos)
-        console.log('add-todo controller')
-    },
+  addTodo(title, description, dueDateString, priority, note) {
+    const todoItem = new TodoItem(
+      title,
+      description,
+      dueDateString,
+      priority,
+      note
+    );
+    todos.push(todoItem);
+    renderTodo(todoItem);
+    saveTodos(todos);
+  },
 
-    deleteTodo(id) {
-        const originalLength = todos.length
-        todos = todos.filter(todo => todo.id !== id)
-        if(todos.length < originalLength) {
-            todoView.removeTodoElement(id)
-            saveTodos(todos)
-            console.log('delete controller')
-        }
-    },
+  deleteTodo(id) {
+    console.log("deleting selected todo...");
+    const originalLength = todos.length;
 
-    toggleTodoCompletion(id) {
-        console.log('toggle controller')
-        const todoCompleted = todos.find(todo => todo.id === id)
-        if(todoCompleted) {
-            todoCompleted.toggleCompleted()
-        todoView.updateTodoElement(todoCompleted)
-        saveTodos(todos)
+    todos = todos.filter((todo) => todo.id !== id);
+
+    if (todos.length < originalLength) {
+      console.log(`To-do removed from array. New length:`, todos.length);
+
+      removeTodo(id);
+    } else {
+      console.warn(
+        `Warning: No todo found in array with ID: ${id}. No action taken.`
+      );
     }
-    },
+  },
 
-    renderAllTodos() {
-        console.log('remove all control')
-        todoView.clearTodos()
-        todos.forEach(todo => {
-            todoView.renderTodo(todo)
-        })
-    },
-
-    handleTodoClick(event) {
-        console.log('handle click control')
-        const target = event.target
-        const listItem = target.closest('li')
-
-        if(!listItem) return
-
-        const id = parseInt(listItem.dataset.id)
-
-        if (target.classList.contains('delete-button')) {
-            this.deleteTodo(id)
-        }else {
-            this.toggleTodoCompletion(id)
-        }
+  toggleTodoCompletion(id) {
+    console.log("toggle controller");
+    const todoCompleted = todos.find((todo) => todo.id === id);
+    if (todoCompleted) {
+      todoCompleted.toggleCompleted();
+      updateTodoElement(todoCompleted);
+      saveTodos(todos);
     }
-}
+  },
+
+  renderAllTodos() {
+    console.log("displaying all todos...");
+    //todoView.clearTodos()
+    todos.forEach((todo) => {
+      renderTodo(todo);
+    });
+  },
+
+  handleTodoClick(event) {
+    console.log("handle click control");
+    const target = event.target;
+    const listItem = target.closest("li");
+
+    if (!listItem) return;
+
+    const id = parseInt(listItem.dataset.id);
+
+    if (target.classList.contains("delete-button")) {
+      this.deleteTodo(id);
+    } else {
+      this.toggleTodoCompletion(id);
+    }
+  },
+};
