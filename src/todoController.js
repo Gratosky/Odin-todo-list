@@ -1,11 +1,6 @@
 import { TodoItem } from "./todoItem";
 import { loadTodos, saveTodos } from "./storage";
-import {
-  renderTodo,
-  removeTodo,
-  clearTodos,
-  updateTodoElement,
-} from "./todoViews";
+import { renderTodo, removeTodo, updateTodoElement } from "./todoViews";
 
 let todos = [];
 
@@ -31,7 +26,7 @@ export const todoController = {
   },
 
   deleteTodo(id) {
-    console.log("deleting selected todo...");
+    console.log("deleting selected todo...", id);
     const originalLength = todos.length;
 
     todos = todos.filter((todo) => todo.id !== id);
@@ -40,6 +35,7 @@ export const todoController = {
       console.log(`To-do removed from array. New length:`, todos.length);
 
       removeTodo(id);
+      saveTodos(todos);
     } else {
       console.warn(
         `Warning: No todo found in array with ID: ${id}. No action taken.`
@@ -72,7 +68,7 @@ export const todoController = {
 
     if (!listItem) return;
 
-    const id = parseInt(listItem.dataset.id);
+    const id = listItem.dataset.id;
 
     if (target.classList.contains("delete-button")) {
       this.deleteTodo(id);
