@@ -6,25 +6,13 @@ const generateUniqueId = () => {
 
 //class to create todo items
 export class TodoItem {
-  constructor(
-    title,
-    description,
-    dueDateString,
-    priority,
-    completed = false,
-    initialNote = ""
-  ) {
+  constructor(title, note, priority, completed = false) {
     this.title = title;
-    this.description = description;
-    this.dueDate = dueDateString ? parseISO(dueDateString) : null;
+    this.note = note;
+    //this.dueDate = dueDateString ? parseISO(dueDateString) : null;
     this.priority = priority;
-    this.note = initialNote;
     this.completed = completed;
     this.id = generateUniqueId();
-  }
-
-  addNote(text) {
-    this.note = text;
   }
 
   toggleCompleted() {
@@ -34,11 +22,11 @@ export class TodoItem {
   static fromObject(obj) {
     const todo = new TodoItem(
       obj.title,
-      obj.description,
-      obj.dueDate ? formatISO(parseISO(obj.dueDate)) : null,
+      obj.note,
+
+      //obj.dueDate ? formatISO(parseISO(obj.dueDate)) : null,
       obj.priority,
       obj.completed,
-      obj.note,
       obj.id
     );
     return todo;

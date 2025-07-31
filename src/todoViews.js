@@ -4,8 +4,7 @@ const todoListElement = document.getElementById("todo-list");
 export const renderTodo = (todoItem) => {
   //create the list item
   const listItem = document.createElement("li");
-  listItem.textContent = todoItem;
-  listItem.dataset.id = todoItem.id.toString();
+  listItem.dataset.id = todoItem.id; //.toString();
   listItem.classList.add("list-item");
 
   if (todoItem.completed) {
@@ -17,18 +16,24 @@ export const renderTodo = (todoItem) => {
   todoContent.classList.add("todo-content");
 
   //create space for title
-  const listItemTitle = document.createElement("p");
+  const listItemTitle = document.createElement("div");
   listItemTitle.textContent = todoItem.title;
   listItemTitle.classList.add("todo-title");
   todoContent.appendChild(listItemTitle);
 
   //create space for note
-  const listItemNote = document.createElement("p");
+  const listItemNote = document.createElement("span");
   listItemNote.textContent = todoItem.note;
   listItemNote.classList.add("todo-note");
   todoContent.appendChild(listItemNote);
 
   listItem.appendChild(todoContent);
+
+  //create space for priority
+  const listItemPriority = document.createElement("span");
+  listItemPriority.textContent = todoItem.priority;
+  listItemPriority.classList.add("todo-priority");
+  todoContent.appendChild(listItemPriority);
 
   //create delete buttons for list items
   const deleteButton = document.createElement("button");

@@ -1,6 +1,11 @@
 import { TodoItem } from "./todoItem";
 import { loadTodos, saveTodos } from "./storage";
-import { renderTodo, removeTodo, updateTodoElement } from "./todoViews";
+import {
+  renderTodo,
+  removeTodo,
+  clearTodos,
+  updateTodoElement,
+} from "./todoViews";
 
 let todos = [];
 
@@ -12,14 +17,9 @@ export const todoController = {
     this.renderAllTodos();
   },
 
-  addTodo(title, description, dueDateString, priority, note) {
-    const todoItem = new TodoItem(
-      title,
-      description,
-      dueDateString,
-      priority,
-      note
-    );
+  addTodo(title, note, priority) {
+    const todoItem = new TodoItem(title, note, priority);
+    console.log(todoItem);
     todos.push(todoItem);
     renderTodo(todoItem);
     saveTodos(todos);
@@ -55,7 +55,7 @@ export const todoController = {
 
   renderAllTodos() {
     console.log("displaying all todos...");
-    //todoView.clearTodos()
+    clearTodos();
     todos.forEach((todo) => {
       renderTodo(todo);
     });
